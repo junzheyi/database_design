@@ -16,7 +16,7 @@ app.secret_key = os.urandom(24)
 
 # 数据库连接配置
 db_config = {
-    'host': '121.43.96.214',
+    'host': 'your host****',
     'port': 3306,
     'user': 'final',
     'password': 'final',
