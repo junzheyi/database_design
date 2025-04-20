@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}首页 - 商品库存管理系统{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+    <h1 class="display-4">商品库存管理系统</h1>
+    <p class="lead">欢迎使用商品库存管理系统，您可以管理商品、供应商、采购和销售记录。</p>
+    <hr class="my-4">
+    <p>请从上方菜单选择要操作的数据表或功能。</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>数据表</h5>
+            </div>
+            <div class="card-body">
+                <p>管理系统中的各类数据表</p>
+                <a href="{{ url_for('show_table', table_name='Goods') }}" class="btn btn-primary">查看商品</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>统计分析</h5>
+            </div>
+            <div class="card-body">
+                <p>数据统计和分析功能</p>
+                <a href="{{ url_for('calculate_daily_sales') }}" class="btn btn-primary">销售统计</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>系统信息</h5>
+            </div>
+            <div class="card-body">
+                <p><strong>版本：</strong> 1.0.0</p>
+                <p><strong>数据库：</strong> MySQL</p>
+                <p><strong>技术栈：</strong> Python/Flask</p>
+                <p><strong>版权所有：</strong> 华中科技大学电子信息与通信学院</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

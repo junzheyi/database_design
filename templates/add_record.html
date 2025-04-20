@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}添加记录 - {{ table_name }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>添加记录 <small class="text-muted">{{ table_name }}</small></h2>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <form action="{{ url_for('add_record', table_name=table_name) }}" method="post">
+            {% for column in columns %}
+                {% if 'auto_increment' not in column.Extra %}
+                <div class="form-group row">
+                    <label for="{{ column.Field }}" class="col-sm-3 col-form-label">{{ column.Field }}</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="{{ column.Field }}" name="{{ column.Field }}" 
+                               {% if 'int' in column.Type %}placeholder="整数"
+                               {% elif 'decimal' in column.Type or 'float' in column.Type or 'double' in column.Type %}placeholder="小数"
+                               {% elif 'date' in column.Type %}placeholder="YYYY-MM-DD" type="date"
+                               {% else %}placeholder="{{ column.Field }}"{% endif %}>
+                        <small class="form-text text-muted">
+                            {% if column.Type %}类型: {{ column.Type }}{% endif %}
+                            {% if column.Null == 'NO' %} (必填){% endif %}
+                        </small>
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+            <div class="form-group row">
+                <div class="col-sm-9 offset-sm-3">
+                    <button type="submit" class="btn btn-primary">保存</button>
+                    <a href="{{ url_for('show_table', table_name=table_name) }}" class="btn btn-secondary ml-2">取消</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

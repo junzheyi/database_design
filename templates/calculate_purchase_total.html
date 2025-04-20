@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}计算采购总额 - 商品库存管理系统{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>计算采购总额</h2>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <form action="{{ url_for('calculate_purchase_total') }}" method="post">
+            <div class="form-group row">
+                <label for="purchase_id" class="col-sm-3 col-form-label">选择采购记录ID</label>
+                <div class="col-sm-9">
+                    <select class="form-control" id="purchase_id" name="purchase_id">
+                        <option value="">-- 请选择 --</option>
+                        {% for id in purchase_ids %}
+                        <option value="{{ id }}" {% if purchase_id == id %}selected{% endif %}>{{ id }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-9 offset-sm-3">
+                    <button type="submit" class="btn btn-primary">计算</button>
+                </div>
+            </div>
+        </form>
+
+        {% if total is defined %}
+        <div class="alert alert-success mt-4">
+            <h4 class="alert-heading">计算结果</h4>
+            <p class="mb-0">采购记录ID {{ purchase_id }} 的总金额为: <strong>¥{{ "{:,.2f}".format(total) }}</strong></p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
